@@ -32,6 +32,7 @@ private
     method = current_request.request_method.downcase
     method[0..0] = method[0..0].upcase
 
+    Net::HTTP.const_set(:HTTPVersion, 1.0)
     request = Net::HTTP.const_get(method).new("#{uri.path}#{"?" if uri.query}#{uri.query}")
 
     if request.request_body_permitted? and current_request.body
